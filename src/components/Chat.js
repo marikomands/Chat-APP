@@ -15,8 +15,8 @@ const Chat = () => {
   useEffect(() => {
     const database = getDatabase();
     const messagesRef = ref(database, "chat/");
-    onValue(messagesRef, (snapshot) => {
-      const data = snapshot.val();
+    onValue(messagesRef, (text) => {
+      const data = text.val();
       console.log("🚀 ~ onValue ~ data:", data);
       if (data) {
         const values = Object.values(data);
@@ -25,20 +25,6 @@ const Chat = () => {
       }
     });
   }, []);
-
-  // update messages ↓
-  const formSubmit = (e) => {
-    e.preventDefault();
-    const database = getDatabase();
-    const messagesRef = ref(database, "chat/");
-    const message = { text, timestamp: new Date().getTime(), userName };
-    // getTime()でミリセカンドに変換して、timestampのフォーマットにする
-    // or Date.now()でも可能;
-    push(messagesRef, message);
-    setText("");
-    setUserName("");
-  };
-  console.log("🚀 ~ send ~ push:", push);
 
   // const formattedTimestamp = new Date(messages.timestamp).toLocaleString();
   // console.log(`Sent at: ${formattedTimestamp}`);
@@ -55,7 +41,6 @@ const Chat = () => {
         </div>
       ))}
       <Text
-        formSubmit={formSubmit}
         text={text}
         setText={setText}
         userName={userName}
