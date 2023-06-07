@@ -1,0 +1,14 @@
+.date-time {
+  margin: 0;
+  font-size: 10px;
+  color: grey;
+  margin-bottom: 10px;
+}
+.text {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.submit {
+  margin-left: 10px;
+}
