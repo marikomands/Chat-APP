@@ -26,9 +26,6 @@ const Chat = () => {
     });
   }, []);
 
-  // const formattedTimestamp = new Date(messages.timestamp).toLocaleString();
-  // console.log(`Sent at: ${formattedTimestamp}`);
-
   return (
     <div>
       {messages.map((message, idx) => (
