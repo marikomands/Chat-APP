@@ -1,4 +1,20 @@
-const Text = ({ formSubmit, text, setText, userName, setUserName }) => {
+import { getDatabase, ref, push } from "firebase/database";
+
+// update texts ↓
+const Text = ({ text, setText, userName, setUserName }) => {
+  const formSubmit = (e) => {
+    e.preventDefault();
+    const database = getDatabase();
+    const messagesRef = ref(database, "chat/");
+    const message = { text, timestamp: new Date().getTime(), userName };
+    // getTime()でミリセカンドに変換して、timestampのフォーマットにする
+    // or Date.now()でも可能;
+    push(messagesRef, message);
+    setText("");
+    setUserName("");
+  };
+  console.log("🚀 ~ send ~ push:", push);
+
   return (
     <div>
       <form onSubmit={formSubmit}>
